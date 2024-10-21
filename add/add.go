@@ -6,9 +6,19 @@ import (
 	"os"
 	"strconv"
 	"time"
+	// "bufio"
 )
 
 func changeId(filename string) string{
+  // f, err := os.Open(filename)
+  // defer f.Close()
+  // if err != nil {
+  //   panic(err)
+  // }
+
+  // r := bufio.NewReader(f)
+  // r.ReadString()
+
   curID, err := os.ReadFile(filename)
   if err != nil {
     panic(err)
@@ -26,7 +36,8 @@ func changeId(filename string) string{
     panic(err)
   }
 
-  idFile.WriteString(strconv.Itoa(nextID)) // on incremente l'id dans le fichier
+  // on incremente l'id dans le fichier et on rajoute un \n parce que apparement à partir de 10 il disparait et ça casse tout le programme. Aucune idée de pourquoi le \n disparait à ce moment là par contre et pourquoi en ajouter un supplémentaire casse pas le programme entre 0 et 9
+  idFile.WriteString(strconv.Itoa(nextID)+"\n") 
 
   return strconv.Itoa(nextID)
 } 
